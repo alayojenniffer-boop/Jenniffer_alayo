@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cl.duoc.viviendas.controller.MainController">
+
+    <top>
+        <Label text="Administradora de Viviendas" style="-fx-font-size: 20px; -fx-font-weight: bold;">
+            <padding>
+                <Insets top="12" right="12" bottom="4" left="12"/>
+            </padding>
+        </Label>
+    </top>
+
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="8" right="12" bottom="8" left="12"/>
+            </padding>
+
+            <!-- ===== Formulario de registro ===== -->
+            <VBox spacing="8" style="-fx-border-color: lightgray; -fx-padding: 10;">
+                <Label text="Registro de vivienda" style="-fx-font-weight: bold;"/>
+
+                <!-- Selector de tipo -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Tipo:" minWidth="80"/>
+                    <ComboBox fx:id="cmbTipo" promptText="Seleccione tipo" prefWidth="200"
+                              onAction="#onTipoSeleccionado"/>
+                </HBox>
+
+                <!-- Datos comunes -->
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="80"/>
+                        <ColumnConstraints prefWidth="200"/>
+                    </columnConstraints>
+                    <Label text="Código:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtCodigo" promptText="Ej: PROP-D01"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label text="Superficie (m2):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtSuperficie" promptText="20 a 500"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label text="Habitaciones:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtHabitaciones" promptText="Mayor que 0"
+                               GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <!-- Campos propios de Departamento -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Departamento:" minWidth="80" style="-fx-font-weight: bold;"/>
+                    <Label text="Piso:"/>
+                    <TextField fx:id="txtPiso" promptText="Ej: 8" prefWidth="70"/>
+                    <CheckBox fx:id="chkGastoComun" text="Gasto común al día"/>
+                    <CheckBox fx:id="chkEstacionamiento" text="Estacionamiento asignado"/>
+                </HBox>
+
+                <!-- Campos propios de Casa -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Casa:" minWidth="80" style="-fx-font-weight: bold;"/>
+                    <CheckBox fx:id="chkPatio" text="Tiene patio"/>
+                </HBox>
+
+                <!-- Operaciones -->
+                <HBox spacing="10">
+                    <Button fx:id="btnRegistrar" text="Registrar" onAction="#onRegistrar"/>
+                    <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"/>
+                </HBox>
+            </VBox>
+
+            <!-- ===== Listado ===== -->
+            <Label text="Viviendas registradas" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="tblViviendas" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colTipo" text="Tipo" prefWidth="120"/>
+                    <TableColumn fx:id="colCodigo" text="Código" prefWidth="140"/>
+                    <TableColumn fx:id="colSuperficie" text="Superficie (m2)" prefWidth="130"/>
+                    <TableColumn fx:id="colHabitaciones" text="Habitaciones" prefWidth="120"/>
+                    <TableColumn fx:id="colCosto" text="Costo arriendo" prefWidth="140"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- ===== Mensajes ===== -->
+    <bottom>
+        <Label fx:id="lblMensaje" wrapText="true" maxWidth="Infinity" minHeight="40"
+               style="-fx-background-color: #f2f2f2;">
+            <padding>
+                <Insets top="8" right="12" bottom="8" left="12"/>
+            </padding>
+        </Label>
+    </bottom>
+</BorderPane>
